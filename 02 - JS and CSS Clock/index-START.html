@@ -6,19 +6,52 @@
 </head>
 <body>
 
+    <div class="ticks-container">
+        <div class="tick-container tick-group-one">
+            <div class="tick twelve"></div>
+            <div class="space"></div>
+            <div class="tick six"></div>
+        </div>
+        <div class="tick-container tick-group-two">
+            <div class="tick one"></div>
+            <div class="space"></div>
+            <div class="tick seven"></div>
+        </div>
+        <div class="tick-container tick-group-three">
+            <div class="tick two"></div>
+            <div class="space"></div>
+            <div class="tick eight"></div>
+        </div>
+        <div class="tick-container tick-group-four">
+            <div class="tick three"></div>
+            <div class="space"></div>
+            <div class="tick nine"></div>
+        </div>
+        <div class="tick-container tick-group-five">
+            <div class="tick four"></div>
+            <div class="space"></div>
+            <div class="tick ten"></div>
+        </div>
+        <div class="tick-container tick-group-six">
+            <div class="tick five"></div>
+            <div class="space"></div>
+            <div class="tick eleven"></div>
+        </div>
+    </div>
 
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
+        <div class="hand hour-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
 
 
+
   <style>
     html {
-      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=5);
+      background: #018DED url(https://i.pinimg.com/originals/5d/a7/d7/5da7d7ae5bf9ea9dc59d83b3fc5cc838.jpg);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -32,20 +65,20 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+      justify-content: center;
     }
 
     .clock {
       width: 30rem;
       height: 30rem;
-      border: 20px solid white;
+      border: 20px solid rgb(231, 231, 231);
       border-radius: 50%;
-      margin: 50px auto;
-      position: relative;
+      position: absolute;
       padding: 2rem;
       box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
-        inset 0 0 10px black,
+        0 2.5px 5px 10px rgba(0,0,0,0.1),
+        inset 0 0 0 4px rgba(239, 239, 239, 0.349),
+        inset 0 0 10px rgba(0, 0, 0, 0.377),
         0 0 10px rgba(0,0,0,0.2);
     }
 
@@ -58,17 +91,110 @@
 
     .hand {
       width: 50%;
-      height: 6px;
+      height: 8px;
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.02s;
+      transition-timing-function: cubic-bezier(1,-1.27, 0.21, 2.92);
+      box-shadow: 1px 2px 4px rgba(44, 44, 44, 0.5);
+    }
+
+    .hour-hand {
+      width: 40%;
+      margin-left: 10%;
+    }
+
+    .min-hand {
+      height: 6px;
+    }
+
+    .second-hand {
+      height: 4px;
+      margin: 1px 0px;
+      background-color: rgb(96, 0, 160);
+    }
+
+    .ticks-container {
+      width: 33rem;
+      height: 33rem;
+      border: 20px transparent;
+      border-radius: 50%;
+      position: absolute;
+      background: rgb(169, 63, 255) url(https://ak6.picdn.net/shutterstock/videos/1084996/thumb/1.jpg);
+    }
+
+    .tick-container {
+      width: 100%;
+      height: 4px;
+      position: absolute;
+      top: 50%;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .tick-group-one {
+      transform: rotate(90deg);
+    }
+
+    .tick-group-two {
+      transform: rotate(120deg);
+    }
+
+    .tick-group-three {
+      transform: rotate(150deg);
+    }
+
+    .tick-group-four {
+      transform: rotate(180deg);
+    }
+
+    .tick-group-five {
+      transform: rotate(210deg);
+    }
+
+    .tick-group-six {
+      transform: rotate(240deg);
+    }
+
+    .tick {
+      width: 5%;
+      height: 4px;
+      background: rgb(231, 231, 231);
+    }
+
+    .space {
+      width: 90%;
     }
 
   </style>
 
   <script>
+  const secondHand = document.querySelector('.second-hand');
+  const minsHand = document.querySelector('.min-hand');
+  const hourHand = document.querySelector('.hour-hand');
 
+  function setDate() {
+    const now = new Date();
 
-  </script>
+    const seconds = now.getSeconds();
+    const secondsDegrees = ((seconds / 60) * 360) + 90;
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+    const mins = now.getMinutes();
+    const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
+    minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+    const hour = now.getHours();
+    const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
+    hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+  }
+
+  setInterval(setDate, 1000);
+
+  setDate();
+</script>
 </body>
 </html>
