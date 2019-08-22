@@ -6,48 +6,50 @@
 </head>
 <body>
 
-    <div class="ticks-container">
-        <div class="tick-container tick-group-one">
-            <div class="tick twelve"></div>
-            <div class="space"></div>
-            <div class="tick six"></div>
-        </div>
-        <div class="tick-container tick-group-two">
-            <div class="tick one"></div>
-            <div class="space"></div>
-            <div class="tick seven"></div>
-        </div>
-        <div class="tick-container tick-group-three">
-            <div class="tick two"></div>
-            <div class="space"></div>
-            <div class="tick eight"></div>
-        </div>
-        <div class="tick-container tick-group-four">
-            <div class="tick three"></div>
-            <div class="space"></div>
-            <div class="tick nine"></div>
-        </div>
-        <div class="tick-container tick-group-five">
-            <div class="tick four"></div>
-            <div class="space"></div>
-            <div class="tick ten"></div>
-        </div>
-        <div class="tick-container tick-group-six">
-            <div class="tick five"></div>
-            <div class="space"></div>
-            <div class="tick eleven"></div>
-        </div>
-    </div>
 
     <div class="clock">
-      <div class="clock-face">
-        <div class="hand min-hand"></div>
-        <div class="hand hour-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="clock-face">
+            <div class="ticks-container">
+                <div class="tick-container tick-group-one">
+                    <div class="tick twelve"></div>
+                    <div class="space"></div>
+                    <div class="tick six"></div>
+                </div>
+                <div class="tick-container tick-group-two">
+                    <div class="tick one"></div>
+                    <div class="space"></div>
+                    <div class="tick seven"></div>
+                </div>
+                <div class="tick-container tick-group-three">
+                    <div class="tick two"></div>
+                    <div class="space"></div>
+                    <div class="tick eight"></div>
+                </div>
+                <div class="tick-container tick-group-four">
+                    <div class="tick three"></div>
+                    <div class="space"></div>
+                    <div class="tick nine"></div>
+                </div>
+                <div class="tick-container tick-group-five">
+                    <div class="tick four"></div>
+                    <div class="space"></div>
+                    <div class="tick ten"></div>
+                </div>
+                <div class="tick-container tick-group-six">
+                    <div class="tick five"></div>
+                    <div class="space"></div>
+                    <div class="tick eleven"></div>
+                </div>
+            </div>
+            <div class="hand min-hand"></div>
+            <div class="hand hour-hand"></div>
+            <div class="hand second-hand"></div>
+        </div>
       </div>
-    </div>
 
 
+
+    <span class="dot"></span>
 
   <style>
     html {
@@ -74,12 +76,13 @@
       border: 20px solid rgb(231, 231, 231);
       border-radius: 50%;
       position: absolute;
-      padding: 2rem;
+      padding: 1rem;
       box-shadow:
         0 2.5px 5px 10px rgba(0,0,0,0.1),
         inset 0 0 0 4px rgba(239, 239, 239, 0.349),
         inset 0 0 10px rgba(0, 0, 0, 0.377),
         0 0 10px rgba(0,0,0,0.2);
+      background: rgb(169, 63, 255) url(https://ak6.picdn.net/shutterstock/videos/1084996/thumb/1.jpg);
     }
 
     .clock-face {
@@ -97,9 +100,9 @@
       top: 50%;
       transform-origin: 100%;
       transform: rotate(90deg);
-      transition: all 0.02s;
-      transition-timing-function: cubic-bezier(1,-1.27, 0.21, 2.92);
-      box-shadow: 1px 2px 4px rgba(44, 44, 44, 0.5);
+      /* transition: all 0.02s;
+      transition-timing-function: cubic-bezier(1,-1.27, 0.21, 2.92); */
+      box-shadow: 0 0 10px 2px rgba(139, 139, 139, 0.144);
     }
 
     .hour-hand {
@@ -109,21 +112,15 @@
 
     .min-hand {
       height: 6px;
+      width: 46%;
+      margin-left: 4%;
     }
 
     .second-hand {
       height: 4px;
-      margin: 1px 0px;
+      width: 47%;
+      margin: 1px 0px 1px 3%;
       background-color: rgb(96, 0, 160);
-    }
-
-    .ticks-container {
-      width: 33rem;
-      height: 33rem;
-      border: 20px transparent;
-      border-radius: 50%;
-      position: absolute;
-      background: rgb(169, 63, 255) url(https://ak6.picdn.net/shutterstock/videos/1084996/thumb/1.jpg);
     }
 
     .tick-container {
@@ -169,9 +166,21 @@
       width: 90%;
     }
 
+    .dot {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: rgb(96, 0, 160);
+      border-radius: 50%;
+      display: inline-block;
+      z-index: 10;
+      box-shadow: 0 0 10px 1px rgba(116, 116, 116, 0.144);
+    }
+
   </style>
 
   <script>
+
+  const hand = document.querySelectorAll('.hand')
   const secondHand = document.querySelector('.second-hand');
   const minsHand = document.querySelector('.min-hand');
   const hourHand = document.querySelector('.hour-hand');
